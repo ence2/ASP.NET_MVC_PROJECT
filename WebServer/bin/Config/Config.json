@@ -1,0 +1,7 @@
+{
+  "BindRestApiUrl": "http://localhost:10082",
+  "BindDeepLearningModelUrl": "http://localhost:5000",
+  "DBConnectionString": "Server=localhost;Database=asdsdb;User Id=root;Password=ence88;",
+  "DBaccessPermitSize": 3,
+  "ThreadPoolSize": 3
+}

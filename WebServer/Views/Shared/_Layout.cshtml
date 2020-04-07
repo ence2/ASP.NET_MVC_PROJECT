@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    @*<meta charset="utf-8" />*@
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day by day</title>
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <link href="@Url.Content("~/Content/kendo/2015.3.1111/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.1111/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.1111/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.1111/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.1111/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.1111/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.1111/angular.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.1111/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.1111/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.1111/kendo.aspnetmvc.min.js")"></script>
+
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css">
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+
+    <script src=@Url.Content("~/Scripts/moment.min.js")></script>
+    <link href="@Url.Content("~/Content/bootstrap-editable.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/bootstrap-editable.min.js")"></script>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="modal fade" id="modal" aria-labelledby="myModalLabel" aria-hidden="true">
+    </div>
+
+    <div class="modal fade" id="modal2" aria-labelledby="myModalLabel" aria-hidden="true">
+    </div>
+
+    <div class="modal fade" id="modal3" aria-labelledby="myModalLabel" aria-hidden="true">
+    </div>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container" style="width:80%">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <table>
+                    <tr>
+                        <td><img src="~/Images/main_icon_3.png" style="width:27px; height:27px;font-size:10px" /></td>
+                        <td>@Html.ActionLink("HOME", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav" style="font-size:13px; padding-bottom:2px;">
+                        <li>@Html.ActionLink("ASDS", "Index", "ASDS", null, new { @class = "glyphicon glyphicon-flash" })</li>
+                        <li>@Html.ActionLink("MyEXP", "Index", "MyEXP", null, new { @class = "glyphicon glyphicon-user" })</li>
+                        <li>@Html.ActionLink("GitHub", "", "", null, new { @class = "glyphicon glyphicon-inbox", @href = "https://github.com/ence88" })</li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="padding-top:30px;margin: 0 auto">
+        @RenderBody()
+        <hr />
+        <footer style="text-align:right">
+            <p>This website was developed in the asp.net IIS environment</p>
+            <p style='line-height:70%'><b>Fork me on GitHub</b></p>
+            <p style='line-height:20%'>The source code for this website can be found <a href="https://github.com/ence88/ASP.NET_SAMPLE_PROJECT" target="_blank">here</a>.</p>
+        </footer>
+    </div>
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
+</body>
+</html>
+
+<script>
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + '\n';
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+
+    $(document).on('click', 'a[data-target=#modal]', function (e) {
+        e.preventDefault();
+        var target = $(this).attr("href");
+        // load the url and show modal on success
+        $("#modal").load(target, function () {
+            $("#modal").modal("show");
+        });
+    })
+
+    $(document).on('click', 'a[data-target=#modal2]', function (e) {
+        e.preventDefault();
+        var target = $(this).attr("href");
+        // load the url and show modal on success
+        $("#modal2").load(target, function () {
+            $("#modal2").modal("show");
+        });
+    })
+
+    $(document).on('click', 'a[data-target=#modal3]', function (e) {
+        e.preventDefault();
+        var target = $(this).attr("href");
+        // load the url and show modal on success
+        $("#modal3").load(target, function () {
+            $("#modal3").modal("show");
+        });
+    })
+</script>
+
+<style>
+    .modal-content {
+        position: relative;
+        background-color: #ffffff;
+        border: 1px solid #999999;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        outline: none;
+        -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+        background-clip: padding-box;
+    }
+
+    .modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1040;
+        display: none;
+        overflow: auto;
+        overflow-y: scroll;
+        position: center;
+    }
+
+    .modal-dialog {
+        z-index: 1050;
+        width: auto;
+        padding: 10px;
+        margin-right: auto;
+        margin-left: auto;
+        position: center;
+    }
+
+    /*headers*/
+
+    .k-grid th.k-header,
+    .k-grid-header {
+        text-align: center;
+    }
+
+        .k-grid th.k-header,
+        .k-grid th.k-header .k-link {
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+    /*rows*/
+
+    .k-grid-content > table > tbody > tr {
+        text-align: center;
+        font-size: 9px;
+    }
+
+    .k-grid-content > table > tbody > .k-alt {
+        text-align: center;
+        font-size: 9px;
+    }
+
+    /*selection*/
+
+    .k-grid table tr.k-state-selected {
+    }
+</style>
