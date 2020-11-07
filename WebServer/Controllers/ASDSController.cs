@@ -51,10 +51,19 @@ namespace WebServer.Controllers
 
             try
             {
-                var res = HttpUtility.HttpPostPerform(ServerConfig.Instance.Data.BindDeepLearningModelUrl + "/predict", new ReqData { targetString = model.predictString });
-                StreamReader reader = new StreamReader(res.GetResponseStream());
-                var resData = NetSerializer.ToObject<ResData>(reader.ReadToEnd());
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
 
+                for (int i = 0; i < 100; i++)
+                {
+                    var res = HttpUtility.HttpPostPerform(ServerConfig.Instance.Data.BindDeepLearningModelUrl + "/predict", new ReqData { targetString = model.predictString });
+                    StreamReader reader = new StreamReader(res.GetResponseStream());
+                    //var resData = NetSerializer.ToObject<ResData>(reader.ReadToEnd());
+                }
+
+                ResData resData = new ResData();
+                var sec = sw.ElapsedMilliseconds.ToString();
+                
                 using (var userDB = DataContext.OpenUserDB())
                 {
                     userDB.Insert<predict_record>(new predict_record { prob = resData.right, content = model.predictString, answer = resData.answer, regDate = DateTime.Now });
